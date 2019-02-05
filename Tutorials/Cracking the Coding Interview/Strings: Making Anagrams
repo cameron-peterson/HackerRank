@@ -1,0 +1,51 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the makeAnagram function below.
+    static int makeAnagram(String a, String b) {
+        List <Character> aCharArray = new ArrayList<>();
+        List <Character> bCharArray = new ArrayList<>();
+        int count = 0;
+
+        for(char c : a.toCharArray()) {
+            aCharArray.add(c);
+        }
+        for(char c : b.toCharArray()) {
+            bCharArray.add(c);
+        }
+
+        for(int i = 0; i < aCharArray.size(); i++) {
+            if(bCharArray.contains(aCharArray.get(i))) {
+                bCharArray.remove(aCharArray.get(i));
+                count++;
+            }
+        }
+        return (a.length() + b.length()) - (2 * count);
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String a = scanner.nextLine();
+
+        String b = scanner.nextLine();
+
+        int res = makeAnagram(a, b);
+
+        bufferedWriter.write(String.valueOf(res));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
