@@ -10,27 +10,24 @@ public class Solution {
 
     // Complete the minimumBribes function below.
     static void minimumBribes(int[] q) {
-        // if the value at a given index minus the the index +1 is > 2, it is chaotic.
-        for(int i=0;i<q.length;i++){
-            if((q[i] - (i+1)) > 2){
+        int swaps = 0;
+        int min = q.length;
+        for (int i = q.length - 1; i >= 0; i--){
+            if (q[i] - (i + 1) > 2){
                 System.out.println("Too chaotic");
-                return; 
+                return;
             }
-        }
-               
-        //not chaotic, so calculate the number of swaps
-        int swaps=0;
-        for(int i=0; i< q.length; i++){
-            for(int j=i+1; j<q.length; j++){
-                if(q[i] > q[j]){ 
-                    int tmp=q[j];
-                    q[j]=q[i];
-                    q[i]=tmp;
+            if (q[i] > i+1){
+                swaps += (q[i]-(i+1));
+            } else {
+                if (min > q[i]){
+                    min = q[i];
+                } else if (q[i] != min){
                     swaps++;
                 }
             }
         }
-        System.out.println(swaps);
+        System.out.println(swaps);   
     }
 
     private static final Scanner scanner = new Scanner(System.in);
